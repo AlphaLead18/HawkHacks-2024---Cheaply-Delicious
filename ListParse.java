@@ -19,15 +19,22 @@ public class ListParse {
 		String [] ar = s.split("\",\"");
 
 		Map<String, Data> ingrList = new HashMap<String,Data>();
-		String UNITS = "ML ,L ,MILLILITER ,MILLILITERS,LITER ,LITERS , TSP ,TBSP ,TEASPOON ,"
-				+ "TABLESPOON ,TEASPOONS ,TABLESPOONS ,CUP ,CUPS,G ,Grams ,Gram ,MG ";
+		String [] UNITS = {"ML ","L ","MILLILITER ","MILLILITERS,LITER ","LITERS ","TSP ","TBSP ","TEASPOON ",
+				"TABLESPOON ","TEASPOONS ","TABLESPOONS ","CUP ","CUPS ","G ","Grams ","Gram ","MG "};
 		for(int i=0;i<ar.length;i++) {
 			if(ar[i].contains(",")) {
 				ar[i] = ar[i].substring(0, ar[i].indexOf(","));
 			}
+			if(hasDigit(ar[i]) == true) {
+
+			}
 			System.out.println(ar[i]);
+			System.out.println();
 
 		}
+	}
+	static boolean hasDigit(String input) {
+		return input.matches(".*\\d.*");
 	}
 	class Data{
 		private int amount;
