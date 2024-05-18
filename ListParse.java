@@ -13,6 +13,8 @@ import java.util.Map;
 import java.net.*;
 import java.io.*;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class ListParse {
@@ -48,14 +50,19 @@ public class ListParse {
 		//Isolate ingredients and convert to list
 		int start = s.indexOf("recipeIngredient");
 		while (s.charAt(start) != ('[')) {
+			start++;
+		}
+		while (s.charAt(start) != ('\"')) {
 			start ++;
 		}
 		int end = start;
 		while (s.charAt(end) != (']')) {
 			end ++;
 		}
-		s = s.substring(start+2, end-1);
+		s = s.substring(start+1, end-1);
 		s = s.replace("\n", "").replace("\r", "");
+		s = s.replace("&amp;","and");
+
 		System.out.println(s);
 		String [] ar = s.split("\",\"");
 
@@ -72,9 +79,13 @@ public class ListParse {
 				"MILLIMETRES ","MILLIMETER ","MILLIMETRE ","MM ","MM. ","GILL ","GILLS ","DECILITER ","DECILITRE ",
 				"DECILITERS ","DECILITRES ","DL. ","DL ","OF "};
 		for(int i=0;i<ar.length;i++) {
-			if(ar[i].contains(",")) {
+			/*if(ar[i].contains(",")) {
 				ar[i] = ar[i].substring(0, ar[i].indexOf(","));
 			}
+			/*if(ar[i].contains("(")){
+				ar[i] = ar[i].substring(0,ar[i].indexOf("(")) + ar[i].substring(ar[i].indexOf(")")+1,ar[i].length());
+			}*/
+			System.out.println(ar[i]);
 			for(int j=0;j< UNITS.length;j++){
 				if((ar[i].toUpperCase()).contains(UNITS[j])){
 					String name = ar[i].substring((ar[i].toUpperCase()).indexOf(UNITS[j]) + UNITS[j].length(), ar[i].length());
@@ -86,7 +97,7 @@ public class ListParse {
 			}
 		}
 		for(String ingr :  ingrList.keySet()) {
-			System.out.println(ingr + ": " + ingrList.get(ingr));
+			//System.out.println(ingr + ": " + ingrList.get(ingr));
 		}
 	}
 	static boolean hasDigit(String input) {
