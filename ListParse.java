@@ -1,11 +1,34 @@
 package Tests;
 
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.net.*;
+import java.io.*;
+import java.util.Scanner;
+
 
 public class ListParse {
-	public static void main(String[]args) {
-		String s = " \"prepTime\":\"PT15M\",\"cookTime\":\"PT45M\",\"totalTime\":\"PT60M\",\"recipeIngredient\":[\"6  golden delicious apples, peeled and chopped ((other varieties can be used, can also be sliced))\",\"2 Tbsp granulated sugar\",\"1 3/4 tsp ground cinnamon, (divided)\",\"1 1/2 tsp lemon juice\",\"1 cup light brown sugar\",\"3/4 cup old fashioned oats\",\"3/4 cup all-purpose flour\",\"1/2 cup cold unsalted butter, diced into small cubes\",\"pinch of kosher salt\"],\"recipeInstructions\":[{\"@type\":\"HowToStep\",\"text\":\"Preheat oven to 350 F degrees. &nbsp;Butter an 8x8 baking dish, or spray with non-stick cooking spray. &nbsp;Set aside.\",\"name\":\"Preheat oven to 350 F degrees. &nbsp;Butter an 8x8 baking dish, or spray with non-stick cooking spray. &nbsp;Set aside.\",\"url\":\"https://www.thechunkychef.com/old-fashioned-easy-apple-crisp/#wprm-recipe-11755-step-0-0\"} ]\"";
+	public static void main(String[]args) throws IOException {
+
+		URL oracle = new URL("https://www.allrecipes.com/recipe/12324/apple-pie-i/");
+		BufferedReader in = new BufferedReader(new InputStreamReader(oracle.openStream()));
+
+		String inputLine;
+		String s = "";
+
+		while ((inputLine = in.readLine()) != null) {
+			s += inputLine;
+		}
+
+		//String s = " \"prepTime\":\"PT15M\",\"cookTime\":\"PT45M\",\"totalTime\":\"PT60M\",\"recipeIngredient\":[\"6  golden delicious apples, peeled and chopped ((other varieties can be used, can also be sliced))\",\"2 Tbsp granulated sugar\",\"1 3/4 tsp ground cinnamon, (divided)\",\"1 1/2 tsp lemon juice\",\"1 cup light brown sugar\",\"3/4 cup old fashioned oats\",\"3/4 cup all-purpose flour\",\"1/2 cup cold unsalted butter, diced into small cubes\",\"pinch of kosher salt\"],\"recipeInstructions\":[{\"@type\":\"HowToStep\",\"text\":\"Preheat oven to 350 F degrees. &nbsp;Butter an 8x8 baking dish, or spray with non-stick cooking spray. &nbsp;Set aside.\",\"name\":\"Preheat oven to 350 F degrees. &nbsp;Butter an 8x8 baking dish, or spray with non-stick cooking spray. &nbsp;Set aside.\",\"url\":\"https://www.thechunkychef.com/old-fashioned-easy-apple-crisp/#wprm-recipe-11755-step-0-0\"} ]\"";
 		//Isolate ingredients and convert to list
 		int start = s.indexOf("recipeIngredient");
 		while (s.charAt(start) != ('[')) {
