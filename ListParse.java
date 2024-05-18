@@ -18,19 +18,26 @@ public class ListParse {
 		s = s.substring(start+2, end-1);
 		String [] ar = s.split("\",\"");
 
-		Map<String, Data> ingrList = new HashMap<String,Data>();
+		Map<String, String> ingrList = new HashMap<String,String>();
 		String [] UNITS = {"ML ","L ","MILLILITER ","MILLILITERS,LITER ","LITERS ","TSP ","TBSP ","TEASPOON ",
 				"TABLESPOON ","TEASPOONS ","TABLESPOONS ","CUP ","CUPS ","G ","Grams ","Gram ","MG "};
 		for(int i=0;i<ar.length;i++) {
 			if(ar[i].contains(",")) {
 				ar[i] = ar[i].substring(0, ar[i].indexOf(","));
 			}
-			if(hasDigit(ar[i]) == true) {
-
+			for(int j=0;j< UNITS.length;j++){
+				if((ar[i].toUpperCase()).contains(UNITS[j])){
+					String name = ar[i].substring((ar[i].toUpperCase()).indexOf(UNITS[j]) + UNITS[j].length(), ar[i].length());
+					String unit = ar[i].substring(0,(ar[i].toUpperCase()).indexOf(UNITS[j]) + UNITS[j].length());
+					ingrList.put(name, unit);
+					//System.out.println(name);
+					//System.out.println(unit);
+				}
 			}
-			System.out.println(ar[i]);
-			System.out.println();
 
+		}
+		for(String ingr :  ingrList.keySet()) {
+			System.out.println(ingr + ": " + ingrList.get(ingr));
 		}
 	}
 	static boolean hasDigit(String input) {
@@ -51,4 +58,4 @@ public class ListParse {
 			return this.unit;
 		}
 	}
-}//Hello World
+}
