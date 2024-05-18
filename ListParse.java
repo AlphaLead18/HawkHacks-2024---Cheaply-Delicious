@@ -18,7 +18,7 @@ public class ListParse {
 		s = s.substring(start+2, end-1);
 		String [] ar = s.split("\",\"");
 
-		Map<String, Data> ingrList = new HashMap<String,Data>();
+		Map<String, String> ingrList = new HashMap<String,String>();
 		String [] UNITS = {"ML ","ML.","L ","L. ","MILLILITER ","MILLILITERS","MILLILITRE ","MILLILITRES ","LITER ",
 				"LITERS ","LITRE ","LITRES ","TSP ","TBSP ","TSP. ","TBSP. ","TEASPOON ","TABLESPOON ","TEASPOONS ",
 				"TABLESPOONS ","CUP ","CUPS ","G ","GRAMS ","GRAM ", "MG ","MG. ","MILLIGRAMS ","MILLIGRAM ",
