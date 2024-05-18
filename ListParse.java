@@ -18,9 +18,18 @@ public class ListParse {
 		s = s.substring(start+2, end-1);
 		String [] ar = s.split("\",\"");
 
-		Map<String, String> ingrList = new HashMap<String,String>();
-		String [] UNITS = {"ML ","L ","MILLILITER ","MILLILITERS,LITER ","LITERS ","TSP ","TBSP ","TEASPOON ",
-				"TABLESPOON ","TEASPOONS ","TABLESPOONS ","CUP ","CUPS ","G ","Grams ","Gram ","MG "};
+		Map<String, Data> ingrList = new HashMap<String,Data>();
+		String [] UNITS = {"ML ","ML.","L ","L. ","MILLILITER ","MILLILITERS","MILLILITRE ","MILLILITRES ","LITER ",
+				"LITERS ","LITRE ","LITRES ","TSP ","TBSP ","TSP. ","TBSP. ","TEASPOON ","TABLESPOON ","TEASPOONS ",
+				"TABLESPOONS ","CUP ","CUPS ","G ","GRAMS ","GRAM ", "MG ","MG. ","MILLIGRAMS ","MILLIGRAM ",
+				"FLUID OUNCE ","FLUID OUNCES ","OUNCE ","OUNCES ","FL. OZ. ", "FL OZ ","OZ. ","OZ ","CUP ","C ","C. ",
+				"PINT ","PINTS ","PT ","PT. ","QUART ","QUARTS ","QT. ","QT ", "GALLONS ","GALLON ","GAL. ","GAL",
+				"POUND ","POUNDS ","LBS. ","LB. ","LBS ","LB","KILOGRAM ", "KILOGRAMS ","KG. ","KG ","DASH ","SMALL ",
+				"LARGE ","DOZEN ","FEW ","SEVERAL ","DOLLOP ","DOLLOPS ","PINCH ","PINCHES ","SMIDGEN ","SMIDGENS ",
+				"YARD ","YARDS ","INCH ","INCHES ","IN. ","IN ","CENTIMETERS ","CENTIMETER","CENTIMETRES ",
+				"CENTIMETRE ","CM. ","CM ","METER ","METRE","METERS ","METRES ","m ","m. ","MILLIMETERS ",
+				"MILLIMETRES ","MILLIMETER ","MILLIMETRE ","MM ","MM. ","GILL ","GILLS ","DECILITER ","DECILITRE ",
+				"DECILITERS ","DECILITRES ","DL. ","DL "};
 		for(int i=0;i<ar.length;i++) {
 			if(ar[i].contains(",")) {
 				ar[i] = ar[i].substring(0, ar[i].indexOf(","));
