@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class ListParse {
 	public static void main(String[]args) throws IOException {
 /*
-		URL oracle = new URL("https://www.allrecipes.com/recipe/12324/apple-pie-i/");
+		URL oracle = new URL("https://sallysbakingaddiction.com/apple-pie-recipe/");
 		BufferedReader in = new BufferedReader(new InputStreamReader(oracle.openStream()));
 
 		String inputLine;
