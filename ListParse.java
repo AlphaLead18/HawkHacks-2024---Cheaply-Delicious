@@ -29,7 +29,7 @@ public class ListParse {
 				"YARD ","YARDS ","INCH ","INCHES ","IN. ","IN ","CENTIMETERS ","CENTIMETER","CENTIMETRES ",
 				"CENTIMETRE ","CM. ","CM ","METER ","METRE","METERS ","METRES ","m ","m. ","MILLIMETERS ",
 				"MILLIMETRES ","MILLIMETER ","MILLIMETRE ","MM ","MM. ","GILL ","GILLS ","DECILITER ","DECILITRE ",
-				"DECILITERS ","DECILITRES ","DL. ","DL "};
+				"DECILITERS ","DECILITRES ","DL. ","DL ","OF "};
 		for(int i=0;i<ar.length;i++) {
 			if(ar[i].contains(",")) {
 				ar[i] = ar[i].substring(0, ar[i].indexOf(","));
