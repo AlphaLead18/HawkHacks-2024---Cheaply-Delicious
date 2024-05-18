@@ -66,7 +66,6 @@ public class ListParse {
 					//System.out.println(unit);
 				}
 			}
-
 		}
 		for(String ingr :  ingrList.keySet()) {
 			System.out.println(ingr + ": " + ingrList.get(ingr));
