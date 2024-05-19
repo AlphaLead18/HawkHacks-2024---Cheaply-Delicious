@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+    <title>New Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="icon" href="sandwich.png"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<div id="header"></div>
+<script>
+    $(function () {
+        $("#header").load("header.html");
+    });
+</script>
+<div class="container mx-auto p-4">
+    <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">
+        <h1 class="text-xl font-bold mb-4">Submit a Link</h1>
+        <input id="linkInput" type="text" placeholder="Enter a link" class="border p-2 mb-4 w-full rounded">
+        <button onclick="sendLinkToServer()" class="bg-blue-500 text-white p-2 rounded w-full">Submit</button>
+    </div>
+    <div class="max-w-md mx-auto mt-8 bg-white shadow-lg rounded-lg p-6">
+        <h1 class="text-xl font-bold mb-4">Received Link</h1>
+        <p id="receivedLink" class="p-2 bg-gray-200 rounded mb-4"></p>
+        <table id="ingredientsTable" class="table-auto w-full hidden">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">Ingredient</th>
+                    <th class="px-4 py-2">Quantity</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    async function sendLinkToServer() {
+        let link = document.getElementById('linkInput').value;
+
+        try {
+            let response = await fetch('http://localhost:8080/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ link: link })
+            });
+
+            if (response.ok) {
+                let result = await response.json();
+                console.log('Success:', result);
+
+                formatIngredients(result);
+            } else {
+                console.error('Error:', response.status);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        getLinkFromServer();
+    }
+
+    async function getLinkFromServer() {
+        try {
+            let response = await fetch('http://localhost:8080/getString');
+            if (response.ok) {
+                let result = await response.json();
+                console.log('Received link:', result);
+
+                // Update the UI with the received link
+                document.getElementById('receivedLink').innerText = result.link;
+            } else {
+                console.error('Error:', response.status);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    function formatIngredients(data) {
+        const ingredientsTable = document.getElementById('ingredientsTable');
+        const tbody = ingredientsTable.querySelector('tbody');
+        tbody.innerHTML = '';
+
+        const ingredientsList = data.split(',').map(item => item.trim()).filter(item => item.length > 0);
+
+        ingredientsList.forEach(item => {
+            const [quantity, ...ingredientParts] = item.split(' ').reverse();
+            const ingredient = ingredientParts.reverse().join(' ');
+
+            const row = document.createElement('tr');
+            row.innerHTML = `<td class="border px-4 py-2">${ingredient}</td><td class="border px-4 py-2">${quantity}</td>`;
+            tbody.appendChild(row);
+        });
+
+        ingredientsTable.classList.remove('hidden');
+    }
+</script>
+</body>
+</html>

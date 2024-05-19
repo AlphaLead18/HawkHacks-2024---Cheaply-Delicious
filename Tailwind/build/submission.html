@@ -78,10 +78,12 @@
         <p><strong>Location:</strong> Bakery Section, Store #23</p>
         <p id="linkDisplay"></p>
         <p id="postalCodeDisplay"></p>
+        <p id="response"></p>
         <script>
           window.onload = function () {
             let link = localStorage.getItem("link");
             let postal_code = localStorage.getItem("postal_code");
+            let response = localStorage.getItem("response");
 
             // Get the elements where you want to display the values
             let linkDisplay = document.getElementById("linkDisplay");
