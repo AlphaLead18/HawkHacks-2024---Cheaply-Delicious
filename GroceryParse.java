@@ -42,20 +42,40 @@ public class GroceryParse {
         Elements results = doc.select("div.g");
 
         int c = 0;
-        for (Element result : results) {
+        double minPrice = 1000000;
+        double currentNum = 0;
+        String currentString = "";
+        for (Element result : results){
             // Extract the title and link of the result
             String title = result.select("h3").text();
             String link = result.select(".yuRUbf > a").attr("href");
             String snippet = result.select(".VwiC3b").text();
-            System.out.println("Title: " + title);
-            System.out.println("Link: " + link);
-            System.out.println("Snippet: " + snippet);
-            System.out.println("Position: " + (c + 1));
-            System.out.println("\n");
+            //System.out.println("Title: " + title);
+            //System.out.println("Link: " + link);
+            //System.out.println("Snippet: " + snippet);
+            //System.out.println("Position: " + (c + 1));
+            //System.out.println("\n");
+            if(snippet.contains(String.valueOf('$'))) {
+                int start = snippet.indexOf('$');
+                start++;
+                int end = start + 3;
+                currentString = "";
+                for (int i = start; i <= end; i++) {
+                    currentString += Character.toString(snippet.charAt(i));
+                }
+                try {
+                    currentNum = Double.parseDouble(currentString);
+                    if (currentNum < minPrice && currentNum != 0) {
+                        minPrice = currentNum;
+                    }
+                }
+                catch(NumberFormatException e) {}
+            }
             c++;
         }
+        System.out.println("$" + minPrice);
     }
-    private static String createQuery(String query) {
+    static String createQuery(String query) {
         query = query.replaceAll(" ", "+");
         query += "&num=10";
         return query;
