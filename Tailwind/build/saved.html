@@ -8,6 +8,39 @@
     <link rel="icon" href="sandwich.png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+    async function sendLinkToServer() {
+      let link = document.getElementById('linkInput').value;
+
+      try {
+        let response = await fetch('http://localhost:8080/submit', { // Make sure this URL is correct
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ link: link })
+        });
+
+        let result = await response.json();
+        console.log('Success:', result);
+      } catch (error) {
+    console.error('Error:', error);
+      }
+  }
+  async function getLinkFromServer() {
+    try {
+        let response = await fetch('http://localhost:8080/getString');
+        let result = await response.json();
+        console.log('Received link:', result.link);
+
+        // Update the UI with the received link
+        document.getElementById('receivedLink').innerText = result.link;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   </head>
   <body>
     <div id="header"></div>
@@ -16,7 +49,12 @@
         $("#header").load("header.html");
       });
     </script>
-    <h1>Welcome to the new page!</h1>
-    <!-- Add your content here -->
+    <div class="container mx-auto p-4">
+      <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">
+        <h1 class="text-xl font-bold mb-4">Submit a Link</h1>
+        <input id="linkInput" type="text" placeholder="Enter a link" class="border p-2 mb-4 w-full">
+        <button onclick="sendLinkToServer()" class="bg-blue-500 text-white p-2 rounded">Submit</button>
+      </div>
+    </div>
   </body>
 </html>
