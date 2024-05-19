@@ -1,5 +1,5 @@
 # HawkHacks-2024---Cheaply-Delicious
-This is an early version of a full-stack food-management web application that would allow clients to use a UI to help find recipes, identify ingredients, identify prices, and ascertain whether certain grocery stores are closer (more convenient) or more affordable.
+This is an early version of a full-stack food-management web application that would allow clients to use recipes to, identify ingredients, identify prices, and ascertain whether certain grocery stores are closer (more convenient) or more affordable.
 -------
 Contributors:
 - Samuel Ke: samuelke0604@gmail.com
