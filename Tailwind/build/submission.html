@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Submission</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+      }
+      .header {
+        background-color: #0066cc;
+        color: #dff3d7;
+        padding: 20px;
+        text-align: center;
+        clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        margin: 10px 20px; /* Added margin on the sides */
+      }
+      .item-box {
+        background-color: #f5f9f5;
+        padding: 20px;
+        margin: 10px;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        flex: 1;
+        min-width: 300px; /* Ensures boxes don't get too narrow */
+        max-width: 400px;
+      }
+      .item-box h2 {
+        margin-top: 0;
+        color: #333;
+      }
+      .item-box p,
+      .item-box ul {
+        margin: 10px 0;
+        color: #555;
+      }
+      .item-box ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .item-box ul li {
+        background-color: #f9f9f9;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="sandwich.png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <script>
+      $(function () {
+        $("#header").load("header.html");
+      });
+    </script>
+
+    <div class="container">
+      <div class="item-box">
+        <p><strong>Details</strong></p>
+        <p><strong>Recipe:</strong> Chocolate Cake</p>
+        <p><strong>Amount:</strong> 1 Cake</p>
+        <p><strong>Cost:</strong> $15</p>
+        <p><strong>Location:</strong> Bakery Section, Store #23</p>
+        <p id="linkDisplay"></p>
+        <p id="postalCodeDisplay"></p>
+        <script>
+          window.onload = function () {
+            let link = localStorage.getItem("link");
+            let postal_code = localStorage.getItem("postal_code");
+
+            // Get the elements where you want to display the values
+            let linkDisplay = document.getElementById("linkDisplay");
+            let postalCodeDisplay =
+              document.getElementById("postalCodeDisplay");
+
+            // Set the innerText of the elements to the values
+            linkDisplay.innerText = "Link: " + link;
+            postalCodeDisplay.innerText = "Postal Code: " + postal_code;
+          };
+        </script>
+      </div>
+      <div class="item-box">
+        <p><strong>Ingredients</strong></p>
+        <ul>
+          <li>Flour - 2 cups</li>
+          <li>Sugar - 1.5 cups</li>
+          <li>Cocoa Powder - 0.75 cup</li>
+          <li>Baking Powder - 1.5 tsp</li>
+          <li>Salt - 1 tsp</li>
+        </ul>
+      </div>
+      <div class="item-box">
+        <p><strong>Store Locations</strong></p>
+        <ul>
+          <li>Flour - Store #5</li>
+          <li>Sugar - Store #12</li>
+          <li>Cocoa Powder - Store #8</li>
+          <li>Baking Powder - Store #3</li>
+          <li>Salt - Store #10</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cheaply Delicious</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="sandwich.png" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+  </head>
+  <body class="min-h-screen bg-slate-50 dark:bg-black dark:text-white">
+
+    <div id="header"></div>
+    <script>
+      $(function () {
+        $("#header").load("header.html");
+      });
+    </script>
+
+    <main class="max-w-4xl mx-auto">
+      <section
+        id="hero"
+        class="flex flex-col-reverse justify-center sm:flex-row p-6 items-center gap-8 mb-10"
+      >
+        <article class="sm:w-1/2">
+          <h2
+            class="max-w-md text-3xl font-medium text-center sm:text-5sl sm:text-left text-slate-900 dark:text-white mt-5"
+          >
+            Want to make something
+           delicious and
+            <span class="text-red-500 font-bold dark:text-red-200">save</span> money?
+          </h2> 
+          <p
+            class="max-w-md text-2xl mt-4 text-center sm:text-left text-slate-700 dark:text-slate-400"
+          >
+            We'll fetch the ingredients for your recipe and guide you to where you can get them near your location for the <span class="text-green-600 font-bold dark:text-red-200">cheapest price!</span>
+            Just enter or paste a recipe link and postal code. 
+          </p>
+          <p
+            class="max-w-md text-2xl mt-4 text-center sm:text-left text-slate-700 dark:text-slate-400 mb-3"
+          >
+            
+          </p>  
+          <form action="YourServletURL" method="post">
+            <input
+            type="text"
+            id="userLink"
+            name="userLink"
+            placeholder="Link"
+            style="
+              width: 250px;
+              height: 30px;
+              padding: 5px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              box-sizing: border-box;
+              margin-top: 6px;
+              margin-bottom: 6px;
+              resize: vertical;
+            "
+          />
+            
+          </form>
+          
+          <input
+            type="text"
+            id="postal_code"
+            name="postal_code"
+            placeholder="Postal Code"
+            style="
+              width: 100px;
+              height: 30px;
+              padding: 5px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              box-sizing: border-box;
+              margin-top: 6px;
+              margin-bottom: 6px;
+              resize: vertical;
+            "
+          />
+          <button
+            onclick="storeLink()"
+            style="
+              background-color: #6bb4d3;
+              border: none;
+              color: white;
+              padding: 5px 20px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 14px;
+              margin: 4px 2px;
+              cursor: pointer;
+              height: 30px;
+              border-radius: 5px;
+            "
+          >
+            Submit
+          </button>
+        </article>
+        <img
+          class="w-1/2"
+          src="ingredients.png"
+          alt="ingredients"
+          style="border-radius: 8px"
+        />
+      </section>
+      <hr class="mx-auto bg-black dark:bg-white w-1/2" />
+
+      <h2
+        class="text-2xl font-bold text-center sm:text-2xl mt-3 text-slate-900 dark:text-white"
+      >
+        We offer:
+      </h2>
+
+      <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+<div class="flex items-center justify-center min-h-min mt-3 mb-4 ">
+    <div class="flex items-center justify-between h-20 text-white bg-gray-100 rounded shadow-md">
+      <img class="h-full py-2 pr-4 ml-6" src="longos.png" ></img>
+        <img class="h-full py-2 pr-4 ml-6" src="walmart.png"></img>
+        <img class="h-full py-2 pr-4 ml-6" src="nofrills.png"></img>
+</div>
+    </main>
+    <script>
+      function storeLink() {
+        let link = document.getElementById("userLink").value;
+        let postal_code = document.getElementById("postal_code").value;
+    
+        // Store data in localStorage
+        localStorage.setItem('link', link);
+        localStorage.setItem('postal_code', postal_code);
+    
+        window.location.href = "submission.html";
+      }
+    </script>
+  </body>
+</html>
